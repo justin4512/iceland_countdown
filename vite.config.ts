@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// GitHub Pages serves the site at https://justin4512.github.io/iceland-countdown/
+// Relative base: works on GitHub Pages whatever the repo is named
 export default defineConfig({
-  base: '/iceland-countdown/',
+  base: './',
   plugins: [react()],
   build: {
     chunkSizeWarningLimit: 1200,

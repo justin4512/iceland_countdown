@@ -2,7 +2,7 @@
 
 冰島冬季環島（2027/3/1–3/15）的倒數計時網頁：Three.js 3D 冰島與極光、Soft-3D 儀表板、每天一句幹話。
 
-**網址（部署後）**：https://justin4512.github.io/iceland-countdown/
+**網址（部署後）**：https://justin4512.github.io/iceland_countdown/
 
 ## 功能
 
@@ -22,7 +22,7 @@ npm install
 npm run dev
 ```
 
-開啟 http://localhost:5173/iceland-countdown/
+開啟 http://localhost:5173/
 
 預覽不同階段：網址加 `?now=`，例如
 - `?now=2027-02-24T12:00:00%2B08:00`（起飛模式）
@@ -34,12 +34,12 @@ npm run dev
 
 ## 部署到 GitHub Pages
 
-1. 在 GitHub 建立一個空的 **public** repo，名稱 `iceland-countdown`（不要勾 README）
+1. 在 GitHub 建立一個空的 **public** repo，名稱 `iceland_countdown`（不要勾 README）
 2. 在專案資料夾執行：
    ```bash
    git add -A
    git commit -m "feat: 冰島倒數儀表板"
-   git remote add origin https://github.com/justin4512/iceland-countdown.git
+   git remote add origin https://github.com/justin4512/iceland_countdown.git
    git push -u origin main
    ```
 3. Repo → **Settings → Pages → Build and deployment → Source** 選 **GitHub Actions**

@@ -88,7 +88,7 @@ export default function App() {
           每天台北時間 00:00 解鎖一句新幹話 · 清單只存在你這台裝置
           <br />
           景點照片來自 Wikimedia Commons，作者與授權見各照片說明及{' '}
-          <a href="https://github.com/justin4512/iceland-countdown/blob/main/CREDITS.md" target="_blank" rel="noreferrer">
+          <a href="https://github.com/justin4512/iceland_countdown/blob/main/CREDITS.md" target="_blank" rel="noreferrer">
             CREDITS
           </a>
         </footer>
