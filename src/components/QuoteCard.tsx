@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { SPOTS } from '../data/spots';
 import { CATEGORY_LABEL, quoteFor, unlockedQuotes } from '../lib/quotes';
 import type { Quote } from '../types';
@@ -37,7 +37,16 @@ function shareText(q: Quote) {
   return `🧊 冰島倒數｜${q.date}\n${q.joke}\n💡 ${q.tip}\n${location.href.split('?')[0]}`;
 }
 
-export function QuoteCard({ today, onOpenHistory }: { today: string; onOpenHistory: () => void }) {
+export function QuoteCard({
+  today,
+  onOpenHistory,
+  children,
+}: {
+  today: string;
+  onOpenHistory: () => void;
+  /** extra section pinned to the bottom of the card (the route chart) */
+  children?: ReactNode;
+}) {
   const unlocked = useMemo(() => unlockedQuotes(today), [today]);
   const [offset, setOffset] = useState(0);
   const [toast, setToast] = useState('');
@@ -94,18 +103,23 @@ export function QuoteCard({ today, onOpenHistory }: { today: string; onOpenHisto
           exit={{ opacity: 0, y: -10, filter: 'blur(6px)' }}
           transition={{ duration: 0.4 }}
           className={s.quoteBody}
+          // text and photo sit side by side on wide screens so the card stays as tall as the live panel
+          data-photo={SPOTS.some((x) => x.id === q.spotId && x.photo) || undefined}
         >
-          <span className={`${s.chip} ${s[`cat_${q.category}`]}`}>#{CATEGORY_LABEL[q.category]}</span>
-          <blockquote className={s.joke}>「{q.joke}」</blockquote>
-          <p className={s.tip}>
-            <span aria-hidden>💡</span> {q.tip}
-          </p>
+          <div>
+            <span className={`${s.chip} ${s[`cat_${q.category}`]}`}>#{CATEGORY_LABEL[q.category]}</span>
+            <blockquote className={s.joke}>「{q.joke}」</blockquote>
+            <p className={s.tip}>
+              <span aria-hidden>💡</span> {q.tip}
+            </p>
+          </div>
           <SpotPhoto spotId={q.spotId} />
         </motion.div>
       </AnimatePresence>
       <p className={s.toast} role="status" aria-live="polite">
         {toast}
       </p>
+      {children}
     </Card>
   );
 }

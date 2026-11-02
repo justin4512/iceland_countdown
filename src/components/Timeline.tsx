@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ITINERARY, MAP_SITE_URL, TOTAL_KM } from '../data/itinerary';
 import s from '../styles/ui.module.css';
-import { Card } from './Card';
 import { Icon } from './Icon';
 
 const MAX_KM = Math.max(...ITINERARY.map((d) => d.km));
@@ -10,20 +9,20 @@ const MAX_KM = Math.max(...ITINERARY.map((d) => d.km));
 export function Timeline({ currentDay, onHover }: { currentDay: number; onHover: (day: number) => void }) {
   const [sel, setSel] = useState(currentDay || 1);
   const d = ITINERARY[sel - 1];
+  // Rendered inside the quote card, below the daily quote
   return (
-    <Card
-      kicker={`ROUTE · 15 天 · 約 ${TOTAL_KM.toLocaleString()} km`}
-      title="環島航線圖"
-      className={s.timeline}
-      delay={0.25}
-      action={
-        MAP_SITE_URL ? (
+    <section className={s.timeline} aria-label="環島航線圖">
+      <header className={s.cardHead}>
+        <div>
+          <p className={s.kicker}>ROUTE · 15 天 · 約 {TOTAL_KM.toLocaleString()} km</p>
+          <h2 className={s.cardTitle}>環島航線圖</h2>
+        </div>
+        {MAP_SITE_URL && (
           <a className={s.linkBtn} href={MAP_SITE_URL} target="_blank" rel="noreferrer">
             <Icon name="map" size={16} /> 互動地圖
           </a>
-        ) : undefined
-      }
-    >
+        )}
+      </header>
       <div className={s.bars} role="tablist" aria-label="選擇行程日">
         {ITINERARY.map((x) => (
           <button
@@ -61,6 +60,6 @@ export function Timeline({ currentDay, onHover }: { currentDay: number; onHover:
           {d.km > 340 && <span className={s.warnText}> · 長途日，早點出發</span>}
         </p>
       </motion.div>
-    </Card>
+    </section>
   );
 }

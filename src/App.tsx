@@ -78,10 +78,11 @@ export default function App() {
 
         <main className={s.grid}>
           <Countdown now={now} sound={sound} />
-          <QuoteCard today={today} onOpenHistory={() => setHistoryOpen(true)} />
+          <QuoteCard today={today} onOpenHistory={() => setHistoryOpen(true)}>
+            <Timeline currentDay={currentDay} onHover={setHoverDay} />
+          </QuoteCard>
           <LivePanel now={now} />
           <Checklist daysLeft={left} tripStarted={phase !== 'countdown'} />
-          <Timeline currentDay={currentDay} onHover={setHoverDay} />
         </main>
 
         <footer className={s.footer}>
